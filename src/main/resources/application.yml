@@ -1,0 +1,25 @@
+# 代替原db.properties文件
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: password
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp
+      suffix: .jsp
+# 配置mybatis的mapper扫描路径和别名管理器，注意：原项目中的mapper文件是在dao文件夹下，当前的配置不一定正确
+# 同时还应该在启动类中添加@MapperScan注解或者在接口开发时直接添加@Mapper，才能扫描指定的包（暂时还未添加）
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-location: mapper/*.xml
+  type-aliases-package: com.gdut.dormitory_system # 这里好像要写实体包的位置
+
+
+logging:
+  level:
+    com.kaikeba.express.dao: debug
+
+#spring.resources.static-locations=/static/
