@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 在application.properties中配置：spring.mvc.view.prefix/spring.mvc.view.suffix是没有作用的！！！
  *
  */
-@Configuration
+//@Configuration
 public class PersonalMvcConfig implements WebMvcConfigurer {
 
     @Override
