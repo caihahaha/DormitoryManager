@@ -28,30 +28,30 @@ CREATE TABLE `admin`  (
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `phone` bigint(20) NULL DEFAULT NULL,
   `power` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `describe` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `description` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'csb', '123456', '蔡树彬', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (2, 'zj', '696E25FDACEE8106BC5232AFC69155D6', '张杰', 138138138, '2', '低');
-INSERT INTO `admin` VALUES (3, 'zh', '696E25FDACEE8106BC5232AFC69155D6', '张欢', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (4, 'zk', '696E25FDACEE8106BC5232AFC69155D6', '赵凯', 138138138, '2', '低');
-INSERT INTO `admin` VALUES (5, 'ywj', '696E25FDACEE8106BC5232AFC69155D6', '杨雯雯', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (6, 'wh', '696E25FDACEE8106BC5232AFC69155D6', '王皓', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (7, 'zw', '696E25FDACEE8106BC5232AFC69155D6', '张伟', 138138138, '2', '低');
-INSERT INTO `admin` VALUES (8, 'zj', '696E25FDACEE8106BC5232AFC69155D6', '赵佳', 138138138, '2', '低');
-INSERT INTO `admin` VALUES (9, 'wf', '696E25FDACEE8106BC5232AFC69155D6', '王凡', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (10, 'zn', '696E25FDACEE8106BC5232AFC69155D6', '张娜', 138138138, '1', '高');
-INSERT INTO `admin` VALUES (11, 'jzh', '696E25FDACEE8106BC5232AFC69155D6', '蒋子华', 138138138, '2', '低');
-INSERT INTO `admin` VALUES (12, 'xl', '696E25FDACEE8106BC5232AFC69155D6', '薛磊', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (1, 'csb', 'E10ADC3949BA59ABBE56E057F20F883E', '蔡树彬', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (2, 'zj', 'E10ADC3949BA59ABBE56E057F20F883E', '张杰', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (3, 'zh', 'E10ADC3949BA59ABBE56E057F20F883E', '张欢', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (4, 'zk', 'E10ADC3949BA59ABBE56E057F20F883E', '赵凯', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (5, 'ywj', 'E10ADC3949BA59ABBE56E057F20F883E', '杨雯雯', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (6, 'wh', 'E10ADC3949BA59ABBE56E057F20F883E', '王皓', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (7, 'zw', 'E10ADC3949BA59ABBE56E057F20F883E', '张伟', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (8, 'zj', 'E10ADC3949BA59ABBE56E057F20F883E', '赵佳', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (9, 'wf', 'E10ADC3949BA59ABBE56E057F20F883E', '王凡', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (10, 'zn', 'E10ADC3949BA59ABBE56E057F20F883E', '张娜', 138138138, '1', '高');
+INSERT INTO `admin` VALUES (11, 'jzh', 'E10ADC3949BA59ABBE56E057F20F883E', '蒋子华', 138138138, '2', '低');
+INSERT INTO `admin` VALUES (12, 'xl', 'E10ADC3949BA59ABBE56E057F20F883E', '薛磊', 138138138, '2', '低');
 
 -- ----------------------------
 -- Table structure for class
 -- ----------------------------
-DROP TABLE IF EXISTS `class`;
+DROP TABLE IF EXISTS `class_info`;
 CREATE TABLE `class`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` int(11) NOT NULL,
@@ -63,16 +63,16 @@ CREATE TABLE `class`  (
 -- ----------------------------
 -- Records of class
 -- ----------------------------
-INSERT INTO `class` VALUES (1, 141, '生物', '徐超');
-INSERT INTO `class` VALUES (2, 151, '应化', '刘晨');
-INSERT INTO `class` VALUES (3, 142, '土木', '孙玲');
-INSERT INTO `class` VALUES (4, 161, '物流', '刘阳');
-INSERT INTO `class` VALUES (5, 153, '数师', '张宇');
-INSERT INTO `class` VALUES (6, 162, '物流', '刘阳');
-INSERT INTO `class` VALUES (7, 171, '自动化', '周涵涵');
-INSERT INTO `class` VALUES (8, 154, '土木', '孙玲');
-INSERT INTO `class` VALUES (9, 151, '纺织', '赵凯');
-INSERT INTO `class` VALUES (10, 153, '金融', '刘培');
+INSERT INTO `class_info` VALUES (1, 141, '生物', '徐超');
+INSERT INTO `class_info` VALUES (2, 151, '应化', '刘晨');
+INSERT INTO `class_info` VALUES (3, 142, '土木', '孙玲');
+INSERT INTO `class_info` VALUES (4, 161, '物流', '刘阳');
+INSERT INTO `class_info` VALUES (5, 153, '数师', '张宇');
+INSERT INTO `class_info` VALUES (6, 162, '物流', '刘阳');
+INSERT INTO `class_info` VALUES (7, 171, '自动化', '周涵涵');
+INSERT INTO `class_info` VALUES (8, 154, '土木', '孙玲');
+INSERT INTO `class_info` VALUES (9, 151, '纺织', '赵凯');
+INSERT INTO `class_info` VALUES (10, 153, '金融', '刘培');
 
 -- ----------------------------
 -- Table structure for dormitory_grade

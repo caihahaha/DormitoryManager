@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/7/23 11:15
  * @Description:
  */
-@Controller
+//@Controller
 public class HelloController {
 
     @RequestMapping("/login")

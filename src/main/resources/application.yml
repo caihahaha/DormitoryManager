@@ -1,5 +1,7 @@
 # 代替原db.properties文件
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
@@ -18,12 +20,12 @@ server:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-location: mapper/*.xml
-  type-aliases-package: com.gdut.dormitory_system # 这里好像要写实体包的位置
+  mapper-location: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.gdut.dormitory_system.entity # 这里好像要写实体包的位置
 
 
 logging:
   level:
-    com.kaikeba.express.dao: debug
+    com.gdut.dormitory_system.dao: debug
 
 #spring.resources.static-locations=/static/

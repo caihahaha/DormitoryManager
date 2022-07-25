@@ -21,13 +21,13 @@
         </div>
 
         <div class="middle">
-            <form action="/login" method="post">
+            <form th:action="@{/login}" method="post">
 
-                <span class="erro">${msg}</span>
+                <span class="error" th:text="${msg}"></span>
                 <span class="s1"></span>
                 <span class="s2"></span>
-                <input type="text" name="a_username" value=""  class="iputs"/>
-                <input type="password" name="a_password" value="" class="iputs"/>
+                <input type="text" name="username" value=""  class="inputs"/>
+                <input type="password" name="password" value="" class="inputs"/>
                 <input type="submit" value="登陆"/>
             </form>
         </div>
