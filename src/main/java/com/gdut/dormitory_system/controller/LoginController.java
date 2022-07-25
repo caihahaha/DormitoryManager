@@ -2,6 +2,7 @@ package com.gdut.dormitory_system.controller;
 
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.service.AdminService;
+import com.gdut.dormitory_system.util.HostHolder;
 import com.gdut.dormitory_system.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,14 @@ public class LoginController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private HostHolder hostHolder;
+
+    @GetMapping("/")
+    public String getIndex() {
+        return "/login";
+    }
+
     @GetMapping("/login")
     public String getLogin() {
         return "/login";
@@ -33,7 +42,11 @@ public class LoginController {
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         Admin admin = adminService.findAdminByUsernameAndPwd(username, password);
         if (admin != null) {
-            return "redirect:/index";
+            // 将用户信息保存进hostholder对象
+            hostHolder.setAdmin(admin);
+            model.addAttribute("admin", admin);
+            // return "redirect:/index";
+            return "home_page";
         }
         model.addAttribute("msg", "用户名或密码错误");
         return "/login";

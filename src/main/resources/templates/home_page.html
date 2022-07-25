@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <%--<meta http-equiv="Cache-Control" content="no-siteapp" />--%>
+<!--    <%&#45;&#45;<meta http-equiv="Cache-Control" content="no-siteapp" />&#45;&#45;%>-->
 
     <link rel="icon" th:href="@{/images/favicon.ico}" sizes="32x32" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -18,7 +18,7 @@
 
     <style>
         .o_div{
-            background: url("@{/images/01.jpg}") no-repeat;
+            background: url("/images/01.jpg") no-repeat;
         }
         .o_span{
             display: block;
@@ -35,19 +35,19 @@
     <div class="left_open">
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
-    <%--<ul class="layui-nav left fast-add" lay-filter="">--%>
-        <%--<li class="layui-nav-item">--%>
-            <%--<a href="javascript:;">+新增</a>--%>
-            <%--<dl class="layui-nav-child"> <!-- 二级菜单 -->--%>
-                <%--<dd><a onclick=""><i class="iconfont">&#xe6a2;</i>资讯</a></dd>--%>
-                <%--<dd><a onclick=""><i class="iconfont">&#xe6a8;</i>图片</a></dd>--%>
-                <%--<dd><a onclick=""><i class="iconfont">&#xe6b8;</i>用户</a></dd>--%>
-            <%--</dl>--%>
-        <%--</li>--%>
-    <%--</ul>--%>
+<!--    <%&#45;&#45;<ul class="layui-nav left fast-add" lay-filter="">&#45;&#45;%>-->
+<!--        <%&#45;&#45;<li class="layui-nav-item">&#45;&#45;%>-->
+<!--            <%&#45;&#45;<a href="javascript:;">+新增</a>&#45;&#45;%>-->
+<!--            <%&#45;&#45;<dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;&#45;&#45;%>-->
+<!--                <%&#45;&#45;<dd><a onclick=""><i class="iconfont">&#xe6a2;</i>资讯</a></dd>&#45;&#45;%>-->
+<!--                <%&#45;&#45;<dd><a onclick=""><i class="iconfont">&#xe6a8;</i>图片</a></dd>&#45;&#45;%>-->
+<!--                <%&#45;&#45;<dd><a onclick=""><i class="iconfont">&#xe6b8;</i>用户</a></dd>&#45;&#45;%>-->
+<!--            <%&#45;&#45;</dl>&#45;&#45;%>-->
+<!--        <%&#45;&#45;</li>&#45;&#45;%>-->
+<!--    <%&#45;&#45;</ul>&#45;&#45;%>-->
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">${sessionScope.ad.a_username}</a>
+            <a href="javascript:;" th:text="${admin.username}"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">${sessionScope.ad.a_username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('切换帐号','loginOut')">切换帐号</a></dd>
                 <dd><a href="/loginOut">退出</a></dd>
@@ -225,23 +225,23 @@
         </ul>
         <div class="layui-tab-content" >
             <div class="layui-tab-item layui-show o_div" >
-                <span class="o_span">${sessionScope.ad.a_username}管理员，欢迎来到宿舍管理系统！</span>
+                <span class="o_span"><i class="text-info" th:text="${admin.username}"></i>管理员，欢迎来到宿舍管理系统！</span>
                 <div class="layui-col-md6" style="padding: 30px;left: 60px;background-color: #F2F2F2;">
                 <div class="layui-card">
                 <div class="layui-card-header">个人信息
                         </div>
                         <div class="layui-card-body">
-                            <%--<div class="layui-form-label" style="text-align: left">你好</div>--%>
-                           用户名：${sessionScope.ad.a_username}
+<!--                            <%&#45;&#45;<div class="layui-form-label" style="text-align: left">你好</div>&#45;&#45;%>-->
+                            用户名：<i class="text-info" th:text="${admin.username}"></i>
                         </div>
                         <div class="layui-card-body">
-                            姓名：${sessionScope.ad.a_name}
+                            姓名：<i class="text-info" th:text="${admin.name}"></i>
                         </div>
                         <div class="layui-card-body">
-                            电话：${sessionScope.ad.a_phone}
+                            电话：<i class="text-info" th:text="${admin.phone}"></i>
                         </div>
                         <div class="layui-card-body">
-                            级别描述：${sessionScope.ad.a_describe}
+                            级别描述：<i class="text-info" th:text="${admin.description}"></i>
                         </div>
                 </div>
                 </div>

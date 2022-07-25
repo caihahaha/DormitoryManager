@@ -52,7 +52,7 @@ INSERT INTO `admin` VALUES (12, 'xl', 'E10ADC3949BA59ABBE56E057F20F883E', 'è–›ç£
 -- Table structure for class
 -- ----------------------------
 DROP TABLE IF EXISTS `class_info`;
-CREATE TABLE `class`  (
+CREATE TABLE `class_info`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` int(11) NOT NULL,
   `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
