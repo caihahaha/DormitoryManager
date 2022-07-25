@@ -1,6 +1,9 @@
 package com.gdut.dormitory_system.config;
 
+import com.gdut.dormitory_system.controller.Interceptor.LoginTicketInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,11 +21,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 在application.properties中配置：spring.mvc.view.prefix/spring.mvc.view.suffix是没有作用的！！！
  *
  */
-//@Configuration
+@Configuration
 public class PersonalMvcConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private LoginTicketInterceptor loginTicketInterceptor;
+
+//    @Override
+//    public void configureViewResolvers(ViewResolverRegistry registry) {
+//        registry.jsp("/WEB-INF/jsp/", ".jsp");
+//    }
+
+
     @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/WEB-INF/jsp/", ".jsp");
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginTicketInterceptor)
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg");
     }
 }

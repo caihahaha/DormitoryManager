@@ -4,10 +4,19 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gdut.dormitory_system.dao.AdminDao;
 import com.gdut.dormitory_system.entity.Admin;
+import com.gdut.dormitory_system.entity.LoginTicket;
 import com.gdut.dormitory_system.service.AdminService;
+import com.gdut.dormitory_system.util.CommonUtils;
 import com.gdut.dormitory_system.util.MD5Utils;
+import com.gdut.dormitory_system.util.RedisKeyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @PackgeName: com.gdut.dormitory_system.service.impl
@@ -24,6 +33,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public Admin findAdminByUsernameAndPwd(String username, String password) {
         QueryWrapper<Admin> wrapper = new QueryWrapper<>();
@@ -31,4 +43,32 @@ public class AdminServiceImpl implements AdminService {
         wrapper.eq("password", MD5Utils.MD5EncodeUtf8(password));
         return adminDao.selectOne(wrapper);
     }
+
+    @Override
+    public LoginTicket findAdminByTicket(String ticket) {
+        String ticketKey = RedisKeyUtils.getTicketKey(ticket);
+        return (LoginTicket) redisTemplate.opsForValue().get(ticketKey);
+    }
+
+    @Override
+    public Admin findAdminById(Integer adminId) {
+        return adminDao.selectById(adminId);
+    }
+
+    @Override
+    public Map<String, String> login(String username, String password, Integer expiredSeconds) {
+        Admin admin = findAdminByUsernameAndPwd(username, password);
+        Map<String, String> resultMap = new HashMap<>();
+        if (admin != null) {
+            LoginTicket loginTicket = new LoginTicket(admin.getId(), CommonUtils.generateUUID(), 1, new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+            resultMap.put("ticket", loginTicket.getTicket());
+            String ticketKey = RedisKeyUtils.getTicketKey(loginTicket.getTicket());
+            redisTemplate.opsForValue().set(ticketKey, loginTicket);
+        }else {
+            resultMap.put("msg", "用户名或密码错误");
+        }
+        return resultMap;
+    }
+
+
 }

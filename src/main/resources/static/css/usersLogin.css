@@ -48,12 +48,21 @@
     border-bottom:1px solid #dff0d8;
 }
 
-.middle>form>input{
+.middle>form>.inputs{
+    height: 40px;
+    width: 255px;
+    padding-left: 35px;
+    margin: 20px 30px;
+    border: 1px solid #e0e0e0;
+}
+
+.middle>form>.submit-btn{
     height: 40px;
     width: 290px;
     margin: 20px 30px;
     border: 1px solid #e0e0e0;
 }
+
 
 .middle>form>input:last-child{
     background-color: #f57421;
@@ -69,20 +78,20 @@
 }
 
 .middle>form>.s1{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     position: absolute;
-    left: 35px;
-    top: 40px;
+    left: 32px;
+    top: 25px;
     background: url("../images/J1.PNG") no-repeat;
 }
 
 .middle>form>.s2{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     position: absolute;
-    left: 35px;
-    top: 120px;
+    left: 32px;
+    top: 106px;
     background: url("../images/J2.PNG") no-repeat;
 }
 
