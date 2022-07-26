@@ -17,9 +17,6 @@
     <script th:src="@{/layui_exts/excel.js}"></script>
 
     <style>
-        .o_div{
-            background: url("/images/01.jpg") no-repeat;
-        }
         .o_span{
             display: block;
             text-align: center;
@@ -224,8 +221,8 @@
             <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
         </ul>
         <div class="layui-tab-content" >
-            <div class="layui-tab-item layui-show o_div" >
-                <span class="o_span"><i class="text-info" th:text="${admin.username}"></i>管理员，欢迎来到宿舍管理系统！</span>
+            <div class="layui-tab-item layui-show o_div" th:style="'background: url(' + @{/images/01.jpg} + ') no-repeat;'">
+                <span class="o_span"><i class="text-info" th:text="${admin.name}"></i>管理员，欢迎来到宿舍管理系统！</span>
                 <div class="layui-col-md6" style="padding: 30px;left: 60px;background-color: #F2F2F2;">
                 <div class="layui-card">
                 <div class="layui-card-header">个人信息

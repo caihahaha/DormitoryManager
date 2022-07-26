@@ -27,7 +27,7 @@ public class HomeController {
 
     @GetMapping("/index")
     public String getHomePage(Model model) {
-        model.addAttribute("user", adminService.findAdminById(hostHolder.getAdmin().getId()));
+        model.addAttribute("admin", adminService.findAdminById(hostHolder.getAdmin().getId()));
         return "/home_page";
     }
 }
