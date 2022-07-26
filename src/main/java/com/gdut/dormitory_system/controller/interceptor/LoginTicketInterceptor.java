@@ -1,4 +1,4 @@
-package com.gdut.dormitory_system.controller.Interceptor;
+package com.gdut.dormitory_system.controller.interceptor;
 
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.LoginTicket;

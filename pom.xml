@@ -104,7 +104,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.gdut.dormitory_system.DormitorySystemApplication</mainClass>
+                    <mainClass>com.gdut.dormitory_system.DormitorySystemApplicationTest</mainClass>
                 </configuration>
                 <executions>
                     <execution>

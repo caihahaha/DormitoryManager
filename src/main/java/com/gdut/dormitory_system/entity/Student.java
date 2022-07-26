@@ -1,6 +1,7 @@
 package com.gdut.dormitory_system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -42,4 +43,10 @@ public class Student {
     private Integer classId;
 
     private Integer dormitoryId;
+
+    @TableField(exist = false)
+    private ClassInfo classInfo;
+
+    @TableField(exist = false)
+    private DormitoryInfo dormitoryInfo;
 }
