@@ -17,7 +17,9 @@
     <script th:src="@{/layui_exts/excel.js}"></script>
 
     <style>
-
+        .o_div{
+            background: url("/images/01.jpg") no-repeat;
+        }
         .o_span{
             display: block;
             text-align: center;
@@ -45,7 +47,7 @@
 <!--    <%&#45;&#45;</ul>&#45;&#45;%>-->
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img" th:value="${user}"></a>
+            <a href="javascript:;" th:text="${admin.username}"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">${sessionScope.ad.a_username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onclick="x_admin_show('切换帐号','loginOut')">切换帐号</a></dd>
                 <dd><a href="/loginOut">退出</a></dd>
@@ -70,6 +72,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findStudent">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>学生信息</cite>
 
@@ -88,6 +91,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findClass">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>班级列表</cite>
                         </a>
@@ -95,6 +99,7 @@
 
                     <li>
                         <a _href="/findClassStudent">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>班级学生</cite>
                         </a>
@@ -112,6 +117,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findDormitory">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>宿舍列表</cite>
                         </a>
@@ -121,6 +127,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findDormitoryStudent">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>人员信息</cite>
                         </a>
@@ -130,6 +137,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findDormRepair">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>维修登记</cite>
                         </a>
@@ -148,6 +156,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findDormClean">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>宿舍卫生</cite>
                         </a>
@@ -157,6 +166,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findStudentClean">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>学生卫生</cite>
                         </a>
@@ -174,6 +184,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findVisitor">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>访客列表</cite>
                         </a>
@@ -190,6 +201,7 @@
                 <ul class="sub-menu">
                     <li>
                         <a _href="/findAdmin">
+                            <%--点击在右侧出现动态的Tab--%>
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
@@ -212,19 +224,24 @@
             <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
         </ul>
         <div class="layui-tab-content" >
-            <div class="layui-tab-item layui-show o_div" th:style="'background: url(' + @{/images/01.jpg} + ') no-repeat;'">
-                <span class="o_span" th:text="${user.name} + '管理员，欢迎来到宿舍管理系统！'"></span>
+            <div class="layui-tab-item layui-show o_div" >
+                <span class="o_span"><i class="text-info" th:text="${admin.username}"></i>管理员，欢迎来到宿舍管理系统！</span>
                 <div class="layui-col-md6" style="padding: 30px;left: 60px;background-color: #F2F2F2;">
                 <div class="layui-card">
                 <div class="layui-card-header">个人信息
                         </div>
-                        <div class="layui-card-body" th:text="'用户名：' + ${user.username}">
+                        <div class="layui-card-body">
+<!--                            <%&#45;&#45;<div class="layui-form-label" style="text-align: left">你好</div>&#45;&#45;%>-->
+                            用户名：<i class="text-info" th:text="${admin.username}"></i>
                         </div>
-                        <div class="layui-card-body" th:text="'姓名：' + ${user.name}">
+                        <div class="layui-card-body">
+                            姓名：<i class="text-info" th:text="${admin.name}"></i>
                         </div>
-                        <div class="layui-card-body" th:text="'电话：' + ${user.phone}">
+                        <div class="layui-card-body">
+                            电话：<i class="text-info" th:text="${admin.phone}"></i>
                         </div>
-                        <div class="layui-card-body" th:text="'级别描述：' + ${user.description}">
+                        <div class="layui-card-body">
+                            级别描述：<i class="text-info" th:text="${admin.description}"></i>
                         </div>
                 </div>
                 </div>

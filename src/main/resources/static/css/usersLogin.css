@@ -48,21 +48,12 @@
     border-bottom:1px solid #dff0d8;
 }
 
-.middle>form>.inputs{
-    height: 40px;
-    width: 255px;
-    padding-left: 35px;
-    margin: 20px 30px;
-    border: 1px solid #e0e0e0;
-}
-
-.middle>form>.submit-btn{
+.middle>form>input{
     height: 40px;
     width: 290px;
     margin: 20px 30px;
     border: 1px solid #e0e0e0;
 }
-
 
 .middle>form>input:last-child{
     background-color: #f57421;
@@ -78,24 +69,24 @@
 }
 
 .middle>form>.s1{
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
     position: absolute;
-    left: 32px;
-    top: 25px;
+    left: 2px;
+    top: 45px;
     background: url("../images/J1.PNG") no-repeat;
 }
 
 .middle>form>.s2{
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
     position: absolute;
-    left: 32px;
-    top: 106px;
+    left: 2px;
+    top: 126px;
     background: url("../images/J2.PNG") no-repeat;
 }
 
-.middle>form>.erro{
+.middle>form>.error{
     color: red;
     font-size: 14px;
     margin-left:10px;
@@ -113,7 +104,7 @@
     color: red;
 }
 
-.middle>form>.iputs:hover{
+.middle>form>.inputs:hover{
     border:1px solid red;
 }
 
