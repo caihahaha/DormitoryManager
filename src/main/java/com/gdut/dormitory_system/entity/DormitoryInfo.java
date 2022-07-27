@@ -25,15 +25,15 @@ import lombok.NoArgsConstructor;
 public class DormitoryInfo {
 
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer id;//宿舍id主键
 
-    private String code;
+    private String code;//宿舍编码
 
-    private String dormitoryLocation;
+    private String dormitoryLocation;//宿舍位置
 
-    private Integer bedTotal;
+    private Integer bedTotal;//宿舍床位
 
-    private Integer bedUsed;
+    private Integer bedUsed;//宿舍已使用床位
 
-    private Integer adminId;
+    private String adminName;//宿舍管理员姓名
 }
