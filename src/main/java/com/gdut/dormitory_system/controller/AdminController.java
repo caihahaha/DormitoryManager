@@ -3,6 +3,7 @@ package com.gdut.dormitory_system.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.vo.QueryAdminVO;
 import com.gdut.dormitory_system.service.AdminService;
 import com.gdut.dormitory_system.util.HostHolder;
 import com.gdut.dormitory_system.util.MD5Utils;
@@ -31,14 +32,18 @@ public class AdminController {
      * 分页查询 admin 用户
      */
     @RequestMapping(value = "/findAdmin")
-    public String findAdmin(Admin admin,
+    public String findAdmin(QueryAdminVO queryAdminVO,
                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageIndex,
-                            @RequestParam(defaultValue = "10") Integer pageSize, Model model) {
+                            @RequestParam(defaultValue = "10") Integer pageSize,
+                            Model model) {
 
         // 使用分页插件查找
         PageInfo<Admin> page = new PageInfo<>(pageIndex, pageSize);
         page.setPath("/findAdmin");
-        page = adminService.findPageInfo(admin, page);
+        if (queryAdminVO == null) {
+            queryAdminVO = new QueryAdminVO();
+        }
+        page = adminService.findPageInfo(queryAdminVO, page);
         model.addAttribute("page", page);
         model.addAttribute("admin", hostHolder.getAdmin());
         return "admin_list";

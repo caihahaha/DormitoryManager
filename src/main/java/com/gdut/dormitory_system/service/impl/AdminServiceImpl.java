@@ -8,10 +8,12 @@ import com.gdut.dormitory_system.dao.AdminDao;
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.LoginTicket;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.vo.QueryAdminVO;
 import com.gdut.dormitory_system.service.AdminService;
 import com.gdut.dormitory_system.util.CommonUtils;
 import com.gdut.dormitory_system.util.MD5Utils;
 import com.gdut.dormitory_system.util.RedisKeyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -97,15 +99,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public PageInfo<Admin> findPageInfo(Admin admin, PageInfo<Admin> pageInfo) {
-        // Page(pageIndex, pageSize);
-        // List<Admin> pageInfo = adminDao.se
-        // Page<Admin> pageInfo = new Page<>(pageIndex, pageSize);
-        QueryWrapper<Admin> queryWrapper = new QueryWrapper<>(admin);
-        pageInfo = adminDao.selectPage(pageInfo, queryWrapper);
-        for (Admin admin0 : pageInfo.getRecords()) {
-            System.out.println(admin0.getName());
+    public PageInfo<Admin> findPageInfo(QueryAdminVO queryAdminVO, PageInfo<Admin> pageInfo) {
+
+        QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
+
+        // 多条件组合查询
+        if (!StringUtils.isEmpty(queryAdminVO.getName())) {
+            queryWrapper.like("name", queryAdminVO.getName());
         }
+
+        if (!StringUtils.isEmpty(queryAdminVO.getDescription())) {
+            queryWrapper.like("description", queryAdminVO.getDescription());
+        }
+        pageInfo = adminDao.selectPage(pageInfo, queryWrapper);
+        // for (Admin admin0 : pageInfo.getRecords()) {
+        //     System.out.println(admin0.getName());
+        // }
         return pageInfo;
     }
 
