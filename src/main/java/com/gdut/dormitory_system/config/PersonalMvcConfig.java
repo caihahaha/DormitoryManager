@@ -1,7 +1,7 @@
 package com.gdut.dormitory_system.config;
 
-import com.gdut.dormitory_system.controller.Interceptor.LoginTicketInterceptor;
 import com.gdut.dormitory_system.controller.interceptor.LoginRequiredInterceptor;
+import com.gdut.dormitory_system.controller.interceptor.LoginTicketInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -30,6 +30,7 @@ public class PersonalMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private LoginRequiredInterceptor loginRequiredInterceptor;
+
 //    @Override
 //    public void configureViewResolvers(ViewResolverRegistry registry) {
 //        registry.jsp("/WEB-INF/jsp/", ".jsp");
@@ -39,7 +40,8 @@ public class PersonalMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginTicketInterceptor)
-                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg");
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg")
+                .excludePathPatterns("/login");
 
         registry.addInterceptor(loginRequiredInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg")

@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @PackgeName: com.gdut.dormitory_system
- * @ClassName: DormitorySystemApplication
+ * @ClassName: DormitorySystemApplicationTests
  * @Author: csb
  * Date: 2022/7/23 18:15
  * project name: dormitory-manager
