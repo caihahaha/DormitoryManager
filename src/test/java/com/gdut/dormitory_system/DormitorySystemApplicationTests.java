@@ -1,6 +1,7 @@
 package com.gdut.dormitory_system;
 
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @Description:
  */
 @SpringBootTest
-public class DormitorySystemApplication {
+public class DormitorySystemApplicationTests {
 
     @Test
     void contextLoads() {

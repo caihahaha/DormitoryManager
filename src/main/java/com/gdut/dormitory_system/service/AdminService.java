@@ -1,5 +1,6 @@
 package com.gdut.dormitory_system.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.LoginTicket;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,12 @@ public interface AdminService {
     Admin findAdminById(Integer adminId);
 
     Map<String, String> login(String username, String password, Integer expiredSeconds);
+
+    int addAdmin(Admin admin);
+
+    int deleteAdminById(Integer adminId);
+
+    int updateAdmin(Admin admin);
+
+    Page<Admin> findPageInfo(Admin admin, Integer pageIndex, Integer pageSize);
 }

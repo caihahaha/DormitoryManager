@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <%--<meta http-equiv="Cache-Control" content="no-siteapp" />--%>
+<!--    <%&#45;&#45;<meta http-equiv="Cache-Control" content="no-siteapp" />&#45;&#45;%>-->
 
     <link rel="icon" th:href="@{/images/favicon.ico}" sizes="32x32" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -37,7 +37,7 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="/findAdmin" >
+        <form class="layui-form layui-col-md12 x-so" th:action="${findAdmin}" >
             <input type="hidden" class="layui-input" placeholder="请输入用户名" name="a_id" id="a_id">
             <input class="layui-input" placeholder="请输入用户名" name="a_username" id="a_username">
             <input class="layui-input" placeholder="请输入级别描述" name="a_describe" id="a_describe" >
@@ -51,58 +51,58 @@
     <xblock>
         <button id="addStudnetBtn" class="layui-btn layui-btn-normal"> <i class="layui-icon">&#xe654;</i>添加</button>
         <button class="layui-btn layui-btn-warm" lay-filter="toolbarDemo" lay-submit=""><i class="layui-icon">&#xe67c;</i>导出</button>
-        <span class="x-right" style="line-height:40px">共有数据：${ai.totalCount} 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：<i class="text-info" th:utext="${ai.total}">0</i> 条</span>
     </xblock>
 
-    <%--表格数据--%>
+<!--    <%&#45;&#45;表格数据&#45;&#45;%>-->
     <table class="layui-table" >
         <thead>
         <tr>
-            <%--<th>--%>
-                <%--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--%>
-            <%--</th>--%>
+<!--            <%&#45;&#45;<th>&#45;&#45;%>-->
+<!--                <%&#45;&#45;<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>&#45;&#45;%>-->
+<!--            <%&#45;&#45;</th>&#45;&#45;%>-->
             <th>ID</th>
             <th>用户名</th>
-            <%--<th>密码</th>--%>
+<!--            <%&#45;&#45;<th>密码</th>&#45;&#45;%>-->
             <th>姓名</th>
             <th>电话</th>
-            <%--<th>级别</th>--%>
+<!--            <%&#45;&#45;<th>级别</th>&#45;&#45;%>-->
             <th>级别描述</th>
             <th>操作</th>
         </thead>
         <tbody>
 <!--        要修改为thymeleaf的循环-->
 <!--<c:forEach items="${ai.list}" var="ai">-->
-<!--        <tr>-->
+        <tr th:each="user : ${ai.getRecords()}">
 <!--            <%&#45;&#45;<td>&#45;&#45;%>-->
 <!--                <%&#45;&#45;<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>&#45;&#45;%>-->
 <!--            <%&#45;&#45;</td>&#45;&#45;%>-->
 <!--            <%&#45;&#45;<td>${class.c_id}</td>&#45;&#45;%>-->
-<!--            <td class="myid">${ai.a_id}</td>-->
-<!--            <td>${ai.a_username}</td>-->
+            <td class="myid" th:text="${user.id}">${ai.a_id}</td>
+            <td th:text="${user.username}">${ai.a_username}</td>
 <!--            <%&#45;&#45;<td>${ai.a_password}</td>&#45;&#45;%>-->
-<!--            <td>${ai.a_name}</td>-->
-<!--            <td>${ai.a_phone}</td>-->
+            <td th:text="${user.name}">${ai.a_name}</td>
+            <td th:text="${user.phone}">${ai.a_phone}</td>
 <!--            <%&#45;&#45;<td>${ai.a_power}</td>&#45;&#45;%>-->
-<!--            <td>${ai.a_describe}</td>-->
-<!--            <td class="td-manage">-->
+            <td th:text="${user.description}">${ai.a_describe}</td>
+            <td class="td-manage">
 <!--                <%&#45;&#45;href="/findAdminById?a_id=${ai.a_id}"&#45;&#45;%>-->
-<!--                <a title="编辑" class="updateEdit" href="#">-->
-<!--                    <i class="layui-icon">&#xe642;</i>-->
-<!--                </a>-->
-<!--                <a title="删除" onclick="member_del(this,'${ai.a_id}','${ai.a_power}')" href="javascript:;">-->
-<!--                    <i class="layui-icon">&#xe640;</i>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--        </tr>-->
+                <a title="编辑" class="updateEdit" href="#">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'${ai.a_id}','${ai.a_power}')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
 <!--</c:forEach>-->
         </tbody>
     </table>
 
-    <%--添加模态框--%>
+<!--    <%&#45;&#45;添加模态框&#45;&#45;%>-->
     <div class="layui-row" id="test" style="display: none;">
         <div class="layui-col-md10">
-            <form class="layui-form" id="addEmployeeForm">
+            <form class="layui-form" id="addEmployeeForm" th:action="${addAdmin}">
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名：</label>
                     <div class="layui-input-block">
@@ -157,11 +157,11 @@
 
 <div class="" >
     <input type="hidden" id="totalPageCount" value="${ai.pageTotalCount}"/>
-    <c:import url="pageBtn.jsp">
-        <c:param name="totalCount" value="${ai.totalCount}"/>
-        <c:param name="currentPageNo" value="${ai.pageIndex}"/>
-        <c:param name="totalPageCount" value="${ai.pageTotalCount}"/>
-    </c:import>
+    <import url="pageBtn.html">
+        <param name="totalCount" th:value="${ai.total}"/>
+        <param name="currentPageNo" th:value="${ai.current}"/>
+        <param name="totalPageCount" th:value="${ai.total}"/>
+    </import>
 </div>
 </div>
 <script>
@@ -278,7 +278,8 @@
     $(".updateEdit").click(function () {
         var myid = $(this).parent("td").parent("tr").children(".myid").html();
         //判断
-        var admin_id = ${sessionScope.ad.a_id};
+        // var admin_id = ${sessionScope.ad.a_id};
+        var admin_id = [[${admin.id}]]
         if(admin_id != myid){
             layer.alert("对不起，您没有权限:(");
         }else {
@@ -291,8 +292,10 @@
     /*删除*/
     function member_del(obj,a_id,a_power){
 
-        var power = ${sessionScope.ad.a_power};
-        var id = ${sessionScope.ad.a_id};
+        // var power = ${sessionScope.ad.a_power};
+        // var id = ${sessionScope.ad.a_id};
+        var power = [[admin.power]];
+        var id = [[admin.id]];
         if(power != 1 && id != a_id){
                 layer.alert("对不起，您没有权限:(");
         }

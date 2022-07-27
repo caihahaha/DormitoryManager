@@ -2,6 +2,8 @@ package com.gdut.dormitory_system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.dao.AdminDao;
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.LoginTicket;
@@ -13,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @PackgeName: com.gdut.dormitory_system.service.impl
@@ -70,5 +69,34 @@ public class AdminServiceImpl implements AdminService {
         return resultMap;
     }
 
+    @Override
+    public int addAdmin(Admin admin) {
 
+        return adminDao.insert(admin);
+    }
+
+    @Override
+    public int deleteAdminById(Integer adminId) {
+        return adminDao.deleteById(adminId);
+    }
+
+    @Override
+    public int updateAdmin(Admin admin) {
+        UpdateWrapper<Admin> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", admin.getId());
+        return adminDao.update(admin, updateWrapper);
+    }
+
+    @Override
+    public Page<Admin> findPageInfo(Admin admin, Integer pageIndex, Integer pageSize) {
+        // Page(pageIndex, pageSize);
+        // List<Admin> pageInfo = adminDao.se
+        Page<Admin> pageInfo = new Page<>(pageIndex, pageSize);
+        QueryWrapper<Admin> queryWrapper = new QueryWrapper<>(admin);
+        pageInfo = adminDao.selectPage(pageInfo, queryWrapper);
+        for (Admin admin0 : pageInfo.getRecords()) {
+            System.out.println(admin0.getName());
+        }
+        return pageInfo;
+    }
 }

@@ -16,14 +16,14 @@
 <div class="x-body">
 <!--    把表单封装成一个Admin对象传给服务端-->
     <form class="layui-form"  id="f_auto" action="/updateAdmin" method="post">
-        <input type="hidden" th:value="${sessionScope.a.a_id}" name="a_id" id="a_id" class="layui-input"/>
+        <input type="hidden" th:value="${admin.id}" name="a_id" id="a_id" class="layui-input"/>
         <div class="layui-form-item">
             <label for="a_username" class="layui-form-label">
                 <span class="">用户名</span>
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="a_username" name="a_username"
-                       autocomplete="off" th:value="${sessionScope.a.a_username}" class="layui-input">
+                       autocomplete="off" th:value="${admin.username}" class="layui-input">
             </div>
         </div>
 
@@ -33,7 +33,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="password" id="a_password" name="a_password"
-                       autocomplete="off" th:value="${sessionScope.a.a_password}" class="layui-input">
+                       autocomplete="off" th:value="${admin.password}" class="layui-input">
             </div>
         </div>
 
@@ -43,7 +43,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="a_name" name="a_name"
-                       autocomplete="off" th:value="${sessionScope.a.a_name}" class="layui-input">
+                       autocomplete="off" th:value="${admin.name}" class="layui-input">
             </div>
         </div>
 
@@ -53,7 +53,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="a_phone" name="a_phone"
-                       autocomplete="off" th:value="${sessionScope.a.a_phone}" class="layui-input">
+                       autocomplete="off" th:value="${admin.phone}" class="layui-input">
             </div>
         </div>
 
@@ -63,7 +63,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="a_power" name="a_power"
-                       autocomplete="off" th:value="${sessionScope.a.a_power}" class="layui-input">
+                       autocomplete="off" th:value="${admin.power}" class="layui-input">
             </div>
         </div>
 
@@ -73,7 +73,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="a_describe" name="a_describe"
-                       autocomplete="off" th:value="${sessionScope.a.a_describe}" class="layui-input">
+                       autocomplete="off" th:value="${admin.description}" class="layui-input">
             </div>
         </div>
 
