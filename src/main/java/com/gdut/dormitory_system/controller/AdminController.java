@@ -2,6 +2,7 @@ package com.gdut.dormitory_system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.Admin;
+import com.gdut.dormitory_system.entity.PageInfo;
 import com.gdut.dormitory_system.service.AdminService;
 import com.gdut.dormitory_system.util.HostHolder;
 import com.gdut.dormitory_system.util.MD5Utils;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: zwj
@@ -28,16 +31,15 @@ public class AdminController {
      * 分页查询 admin 用户
      */
     @RequestMapping(value = "/findAdmin")
-    public String findAdmin(String a_username, String a_describe, @RequestParam(defaultValue = "1") Integer pageIndex,
-                            Integer a_id, @RequestParam(defaultValue = "3") Integer pageSize, Model model) {
-        Admin admin = new Admin();
-        admin.setUsername(a_username);
-        admin.setId(a_id);
-        admin.setDescription(a_describe);
+    public String findAdmin(Admin admin,
+                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageIndex,
+                            @RequestParam(defaultValue = "10") Integer pageSize, Model model) {
 
         // 使用分页插件查找
-        Page<Admin> ai = adminService.findPageInfo(admin, pageIndex, pageSize);
-        model.addAttribute("ai", ai);
+        PageInfo<Admin> page = new PageInfo<>(pageIndex, pageSize);
+        page.setPath("/findAdmin");
+        page = adminService.findPageInfo(admin, page);
+        model.addAttribute("page", page);
         model.addAttribute("admin", hostHolder.getAdmin());
         return "admin_list";
     }
@@ -85,4 +87,13 @@ public class AdminController {
         return "admin_edit";
     }
 
+    /**
+     * 导出excel
+     */
+    @PostMapping("/exportAdminList")
+    @ResponseBody
+    public List<Admin> exportAdmin() {
+        List<Admin> admins = adminService.getAll();
+        return admins;
+    }
 }

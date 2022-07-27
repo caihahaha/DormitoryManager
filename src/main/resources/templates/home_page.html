@@ -46,11 +46,11 @@
         <li class="layui-nav-item">
             <a href="javascript:;" th:text="${admin.username}"><img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">${sessionScope.ad.a_username}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('切换帐号','loginOut')">切换帐号</a></dd>
-                <dd><a href="/loginOut">退出</a></dd>
+                <dd><a onclick="x_admin_show('切换帐号','/DormitorySystem/loginOut')">切换帐号</a></dd>
+                <dd><a th:href="@{/loginOut}">退出</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item to-index"><a href="/loginOut">前台首页</a></li>
+        <li class="layui-nav-item to-index"><a th:href="@{/loginOut}">前台首页</a></li>
     </ul>
 
 </div>

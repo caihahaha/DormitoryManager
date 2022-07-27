@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.dao.AdminDao;
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.entity.LoginTicket;
+import com.gdut.dormitory_system.entity.PageInfo;
 import com.gdut.dormitory_system.service.AdminService;
 import com.gdut.dormitory_system.util.CommonUtils;
 import com.gdut.dormitory_system.util.MD5Utils;
@@ -70,6 +71,14 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void loginOut(String ticket) {
+        String redisKey = RedisKeyUtils.getTicketKey(ticket);
+        LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get(redisKey);
+        loginTicket.setStatus(0);
+        redisTemplate.opsForValue().set(redisKey, loginTicket);
+    }
+
+    @Override
     public int addAdmin(Admin admin) {
 
         return adminDao.insert(admin);
@@ -88,15 +97,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Page<Admin> findPageInfo(Admin admin, Integer pageIndex, Integer pageSize) {
+    public PageInfo<Admin> findPageInfo(Admin admin, PageInfo<Admin> pageInfo) {
         // Page(pageIndex, pageSize);
         // List<Admin> pageInfo = adminDao.se
-        Page<Admin> pageInfo = new Page<>(pageIndex, pageSize);
+        // Page<Admin> pageInfo = new Page<>(pageIndex, pageSize);
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>(admin);
         pageInfo = adminDao.selectPage(pageInfo, queryWrapper);
         for (Admin admin0 : pageInfo.getRecords()) {
             System.out.println(admin0.getName());
         }
         return pageInfo;
+    }
+
+    @Override
+    public List<Admin> getAll() {
+
+        List<Admin> adminList = adminDao.selectList(null);
+
+        return adminList;
     }
 }

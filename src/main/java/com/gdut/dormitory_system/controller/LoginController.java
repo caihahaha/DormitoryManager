@@ -2,6 +2,7 @@ package com.gdut.dormitory_system.controller;
 
 import com.gdut.dormitory_system.entity.Admin;
 import com.gdut.dormitory_system.service.AdminService;
+import com.gdut.dormitory_system.util.HostHolder;
 import com.gdut.dormitory_system.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,9 @@ public class LoginController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private HostHolder hostHolder;
+
     @Value("${dormitory-system.ticket-expired-seconds}")
     private Integer expiredSeconds;
 
@@ -52,5 +56,12 @@ public class LoginController {
         }
         model.addAttribute("msg", map.get("msg"));
         return "/login";
+    }
+
+    @RequestMapping("/loginOut")
+    public String loginOut(@CookieValue("ticket") String ticket) {
+         adminService.loginOut(ticket);
+         hostHolder.clear();
+         return "redirect:/login";
     }
 }
