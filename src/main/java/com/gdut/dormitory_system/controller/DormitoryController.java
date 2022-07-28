@@ -3,13 +3,12 @@ package com.gdut.dormitory_system.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.DormitoryInfo;
+import com.gdut.dormitory_system.entity.PageInfo;
 import com.gdut.dormitory_system.service.DormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -23,17 +22,30 @@ public class DormitoryController {
     /*
     分页带条件查询
      */
-    @RequestMapping("/findDormitory")
-    public String findDormitory(String adminName, Integer id, String dormitoryLocation,
-                                Integer pageIndex, Integer pageSize,Model model){
-        IPage<DormitoryInfo> page = dormitoryService.findDormitory(adminName,id,dormitoryLocation,pageIndex,pageSize);
-        model.addAttribute("di",page);
+    @RequestMapping(value = "/findDormitory")
+    public String findDormitory(@RequestParam(value = "adminName",required = false) String adminName,
+                                @RequestParam(value = "code",required = false)String code,
+                                @RequestParam(value = "dormitoryLocation",required = false)String dormitoryLocation,
+                                @RequestParam(value = "pageNum",required = false ,defaultValue = "1")Integer pageNum,
+                                @RequestParam(value = "pageSize",required = false,defaultValue = "10")Integer pageSize, Model model){
+        PageInfo<DormitoryInfo> page = dormitoryService.findDormitory(adminName,code,dormitoryLocation,pageNum,pageSize);
+        page.setPath("/findDormitory");
+        model.addAttribute("page",page);
         return "dormitory_list";
     }
 
     /*
-        根据宿舍编号（code）查询
+        根据宿舍主键(id)查询
      */
+    @RequestMapping("/findDormitoryById")
+    public String findDormitoryById(Integer id,Model model){
+        DormitoryInfo dormitoryInfo = dormitoryService.findDormitoryById(id);
+        model.addAttribute("d",dormitoryInfo);
+        return "dormitory_edit";
+
+    }
+
+
 
 
 
@@ -59,5 +71,28 @@ public class DormitoryController {
         return "dormitory_list";
     }
 
+    /*
+        修改宿舍
+     */
+    @RequestMapping(value = "/updateDormitory",method = RequestMethod.POST)
+    public String updateDormitory(DormitoryInfo dormitoryInfo,HttpSession session){
+        int res = dormitoryService.updateDormitory(dormitoryInfo);
+        //如果想整弹窗，这里可以加判断
+        return "redirect:/findDormitory";
+    }
+
+    /*
+        导出excel
+     */
+
+    /**
+     * 导出Excel
+     */
+    @RequestMapping(value = "/exportdormitorylist", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DormitoryInfo> exportDormitory(){
+        List<DormitoryInfo> dormitoryList = dormitoryService.findAll();
+        return dormitoryList;
+    }
 
 }
