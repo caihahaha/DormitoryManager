@@ -22,8 +22,8 @@ public interface DormitoryService {
     Integer deleteById(Integer dormitoryId);
 
     //根据code查询
-    List<DormitoryInfo> findByCode(Integer code);
-
+    List<DormitoryInfo> findByCode(String code);
+    //根据code查询
     DormitoryInfo findOneByCode(String code);
     //根据id查询
     DormitoryInfo findDormitoryById(Integer id);

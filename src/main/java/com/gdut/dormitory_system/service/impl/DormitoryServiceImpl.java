@@ -63,13 +63,6 @@ public class DormitoryServiceImpl implements DormitoryService {
         return list;
     }
 
-    @Override
-    public DormitoryInfo findOneByCode(String code) {
-        QueryWrapper<DormitoryInfo> wrapper =new QueryWrapper<>();
-        wrapper.eq("code", code);
-        return dormitoryDao.selectOne(wrapper);
-    }
-
     /*
         删除某一个宿舍
      */
@@ -82,10 +75,18 @@ public class DormitoryServiceImpl implements DormitoryService {
         根据code查找宿舍
      */
     @Override
-    public List<DormitoryInfo> findByCode(Integer code) {
+    public List<DormitoryInfo> findByCode(String code) {
         Map<String,Object> cmap = new HashMap<>();
         cmap.put("code",code);
         return dormitoryDao.selectByMap(cmap);
+    }
+
+    //根据code查询
+    @Override
+    public DormitoryInfo findOneByCode(String code) {
+        QueryWrapper<DormitoryInfo> wrapper =new QueryWrapper<>();
+        wrapper.eq("code", code);
+        return dormitoryDao.selectOne(wrapper);
     }
 
     /*
