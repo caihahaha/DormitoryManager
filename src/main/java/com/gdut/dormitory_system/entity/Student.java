@@ -51,5 +51,11 @@ public class Student {
     private String dormitoryCode;
 
     @TableField(exist = false)
+    private String classCode;
+
+    @TableField(exist = false)
+    private String className;
+
+    @TableField(exist = false)
     private DormitoryInfo dormitoryInfo;
 }

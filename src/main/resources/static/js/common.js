@@ -12,3 +12,10 @@ function  page_jump_to(num) {
         location = "?pageNum=" + num
     }
 }
+
+function jump(path, pageNum) {
+    var data = $(document.getElementsByTagName("form")[0]).serializeArray();
+    $.post(baseUrl + path + '?pageNum=' + pageNum, data, function (data) {
+        document.write(data)
+    })
+}

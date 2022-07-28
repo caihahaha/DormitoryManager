@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @PackgeName: com.gdut.dormitory_system.controller
  * @ClassName: ClassInfoController
@@ -44,6 +46,12 @@ public class ClassInfoController {
         model.addAttribute("className", className);
         model.addAttribute("counsellor", counsellor);
         return "class_list";
+    }
+
+    @PostMapping("/exportClassList")
+    @ResponseBody
+    public List<ClassInfo> exportClassList() {
+        return classInfoService.findAllClassInfo();
     }
 
     @PostMapping("/addClassInfo")

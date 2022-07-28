@@ -63,6 +63,13 @@ public class StudentController {
         return "student_list";
     }
 
+    @PostMapping("/exportStudentList")
+    @ResponseBody
+    public List<Student> exportClassList() {
+        // 此处偷懒，将pageinfo写死
+        return studentService.findAllStudent(new PageInfo<>(1, 2000), new QueryStudentVO()).getRecords();
+    }
+
     @PostMapping("/addStudent")
     @ResponseBody
     public String addStudent(@RequestBody Student student) {

@@ -189,7 +189,7 @@
         form.on('submit(toolbarDemo)', function(){
 
             $.ajax({
-                url: '/exportstudentlist',
+                url: baseUrl + '/exportStudentList',
                 type: 'post',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
@@ -198,19 +198,19 @@
 
                     // 1. 如果需要调整顺序，请执行梳理函数
                     var dt = excel.filterExportData(data, [
-                        's_id'
-                        ,'s_studentid'
-                        ,'s_name'
-                        ,'s_sex'
-                        ,'s_age'
-                        ,'s_phone'
-                        ,'s_classid'
-                        ,'s_classname'
-                        ,'s_dormitoryid'
+                        'id'
+                        ,'code'
+                        ,'name'
+                        ,'sex'
+                        ,'age'
+                        ,'phone'
+                        ,'classCode'
+                        ,'className'
+                        ,'dormitoryCode'
                     ]);
 
                     // 2. 数组头部新增表头
-                    dt.unshift({s_id: 'ID', s_studentid: '学号', s_name: '姓名', s_sex: '性别', s_age: '年龄', s_phone: '电话', s_classid: '班级编号', s_classname: '班级名', s_dormitoryid: '寝室编号'});
+                    dt.unshift({id: 'ID', code: '学号', name: '姓名', sex: '性别', age: '年龄', phone: '电话', classCode: '班级编号', className: '班级名', dormitoryCode: '寝室编号'});
 
                     // 意思是：A列40px，B列60px(默认)，C列120px，D、E、F等均未定义
                     var colConf = excel.makeColConfig({

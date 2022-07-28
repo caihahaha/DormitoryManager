@@ -32,6 +32,9 @@
         <result column="student_phone" property="phone"/>
         <result column="dormitory_id" property="dormitoryId"/>
         <result column="class_id" property="classId"/>
+        <result column="class_code" property="classCode"/>
+        <result column="class_name" property="className"/>
+        <result column="dormitory_code" property="dormitoryCode"/>
         <collection property="classInfo" ofType="com.gdut.dormitory_system.entity.ClassInfo">
             <result column="class_code" property="code"/>
             <result column="class_name" property="name"/>
