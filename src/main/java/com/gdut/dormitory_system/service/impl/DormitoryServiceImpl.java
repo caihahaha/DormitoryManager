@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.dao.DormitoryDao;
 import com.gdut.dormitory_system.entity.DormitoryInfo;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.vo.QueryDormitoryStudentVo;
 import com.gdut.dormitory_system.service.DormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,6 +97,12 @@ public class DormitoryServiceImpl implements DormitoryService {
     public int updateDormitory(DormitoryInfo dormitoryInfo) {
         int res = dormitoryDao.updateById(dormitoryInfo);
         return  res;
+    }
+
+    @Override
+    public List<QueryDormitoryStudentVo> findDormitoryStudent(QueryDormitoryStudentVo queryDormitoryStudentVo) {
+        List<QueryDormitoryStudentVo> list =  dormitoryDao.findDormitoryStudent(queryDormitoryStudentVo);
+        return list;
     }
 
 

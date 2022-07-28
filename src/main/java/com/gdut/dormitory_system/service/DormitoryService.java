@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.DormitoryInfo;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.vo.QueryDormitoryStudentVo;
 
 import java.util.List;
 
@@ -28,4 +29,7 @@ public interface DormitoryService {
 
     //更新宿舍
     int updateDormitory(DormitoryInfo dormitoryInfo);
+
+    //查询每个宿舍对应的学生
+    List<QueryDormitoryStudentVo> findDormitoryStudent(QueryDormitoryStudentVo queryDormitoryStudentVo);
 }
