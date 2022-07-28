@@ -1,6 +1,7 @@
 package com.gdut.dormitory_system.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,4 +38,7 @@ public class DormitoryGrade {
     /** 更新时间 */
     @TableField(value = "updated_time", fill = FieldFill.UPDATE)
     private Date updatedTime ;
+
+    @TableField(exist = false)
+    private DormitoryInfo dormitoryInfo;
 }

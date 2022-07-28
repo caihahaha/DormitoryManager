@@ -113,12 +113,12 @@
                         layer.msg(data.msg, {icon: 1, time: 2000});
                         setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                     }else {
-                        layer.msg(data.msg, {icon: 0, time: 3000, area:['200px', '100px']});
+                        layer.msg(data.msg, {icon: 0, time: 3000});
                     }
 
                 },
                 error:function(data){
-                    layer.msg(data.msg, {icon: 0, time: 3000, area:['200px', '100px']});
+                    layer.msg(data.msg, {icon: 0, time: 3000});
                     setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                 }
             });

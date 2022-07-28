@@ -32,15 +32,13 @@ public class ClassInfoController {
     private ClassInfoService classInfoService;
 
     @RequestMapping(value = "/findClassInfo",method = {RequestMethod.GET, RequestMethod.POST})
-    public String getClassInfo(Model model,
-                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public String getClassInfo( @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                  @RequestParam(value = "code", required = false) String code,
                                  @RequestParam(value = "className", required = false) String className,
-                                 @RequestParam(value = "counsellor", required = false) String counsellor) {
+                                 @RequestParam(value = "counsellor", required = false) String counsellor, Model model) {
         PageInfo<ClassInfo> page = new PageInfo<>(pageNum, pageSize);
         page.setPath("/findClassInfo");
-        System.out.println("********************************"+page.getTotal());
         model.addAttribute("page", classInfoService.findClassInfoPage(page, code, className, counsellor));
         model.addAttribute("code", code);
         model.addAttribute("className", className);

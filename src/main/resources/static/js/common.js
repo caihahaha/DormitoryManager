@@ -1,3 +1,4 @@
+const baseUrl = '/DormitorySystem';
 function  page_jump_to(num) {
     var regexp = /^[1-9]\d*$/;
     var totalPageCount = document.getElementById("totalPageCount").value;
