@@ -39,10 +39,9 @@
             <if test="queryStudentGradeVO.studentId != null and queryStudentGradeVO.studentId != ''">
                 and  g.student_id = #{queryStudentGradeVO.studentId}
             </if>
-<!--            <if test="queryStudentGradeVO.dormitoryId != null and queryStudentGradeVO.dormitoryId != ''">-->
-<!--&#45;&#45;                 and concat('%', g.dormitory_id, '%') like concat('%', #{queryStudentGradeVO.dormitoryId}, '%')-->
-<!--                and  g.dormitory_id = #{queryStudentGradeVO.dormitoryId}-->
-<!--            </if>-->
+            <if test="queryStudentGradeVO.dormitoryId != null and queryStudentGradeVO.dormitoryId != ''">
+                and  g.dormitory_id = #{queryStudentGradeVO.dormitoryId}
+            </if>
         </where>
     </select>
     <!--<select id="selectStudentById" resultMap="studentMap">-->
