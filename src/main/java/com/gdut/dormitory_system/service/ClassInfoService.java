@@ -2,6 +2,8 @@ package com.gdut.dormitory_system.service;
 
 import com.gdut.dormitory_system.entity.ClassInfo;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.Student;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -27,4 +29,6 @@ public interface ClassInfoService {
     List<ClassInfo> findAllClassInfo();
 
     ClassInfo findClassInfoById(int id);
+
+    PageInfo<Student> findClassStudent(PageInfo<Student> page, String classCode, String className);
 }

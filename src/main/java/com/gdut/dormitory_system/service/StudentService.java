@@ -25,4 +25,6 @@ public interface StudentService {
     int deleteStudentById(Integer id);
 
     Student findStudentById(Integer id);
+
+    PageInfo<Student> findAllStudentForClass(PageInfo<Student> page, String classCode, String className);
 }

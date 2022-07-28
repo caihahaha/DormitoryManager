@@ -65,4 +65,9 @@ public class StudentServiceImpl implements StudentService {
     public Student findStudentById(Integer id) {
         return studentDao.selectStudentById(id);
     }
+
+    @Override
+    public PageInfo<Student> findAllStudentForClass(PageInfo<Student> page, String classCode, String className) {
+        return studentDao.selectAllStudentForClass(page, classCode, className);
+    }
 }

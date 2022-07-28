@@ -34,4 +34,12 @@ public class StudentServiceTests {
         System.out.println(studentService.findAllStudent(page, null).getRecords());
         System.out.println(page.getTotal());
     }
+
+    @Test
+    public void test02() {
+        PageInfo<Student> page = new PageInfo<>(1,10);
+//        QueryStudentVO queryStudentVO = QueryStudentVO.builder().name("张").build();
+        System.out.println(studentService.findAllStudentForClass(page, null, null).getRecords());
+        System.out.println(page.getTotal());
+    }
 }

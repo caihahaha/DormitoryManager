@@ -96,4 +96,19 @@ public class ClassInfoController {
         model.addAttribute("classInfo", classInfo);
         return "class_edit";
     }
+
+    @RequestMapping(value = "/findClassStudent",method = {RequestMethod.GET, RequestMethod.POST})
+    public String getClassStudent(Model model,
+                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                               @RequestParam(value = "classCode", required = false) String classCode,
+                               @RequestParam(value = "className", required = false) String className) {
+        PageInfo<Student> page = new PageInfo<>(pageNum, pageSize);
+        page.setPath("/findClassStudent");
+        page = classInfoService.findClassStudent(page, classCode, className);
+        model.addAttribute("page", page);
+        model.addAttribute("classCode", classCode);
+        model.addAttribute("className", className);
+        return "class_student_list";
+    }
 }

@@ -15,6 +15,7 @@
             s.class_id,
             c.`code` AS class_code,
             c.`name` AS class_name,
+            c.counsellor,
             d.`code` AS dormitory_code
         FROM
             student s
@@ -34,6 +35,7 @@
         <collection property="classInfo" ofType="com.gdut.dormitory_system.entity.ClassInfo">
             <result column="class_code" property="code"/>
             <result column="class_name" property="name"/>
+            <result column="counsellor" property="counsellor"/>
         </collection>
         <collection property="dormitoryInfo" ofType="com.gdut.dormitory_system.entity.DormitoryInfo">
             <result column="dormitory_code" property="code"/>
@@ -61,5 +63,19 @@
     <select id="selectStudentById" resultMap="studentMap">
         <include refid="student"></include>
         where s.id = #{id}
+    </select>
+
+
+    <select id="selectAllStudentForClass" resultMap="studentMap">
+        <include refid="student"></include>
+        <where>
+            <if test="classCode != null and classCode != ''">
+                and concat('%', c.code, '%') like concat('%', #{classCode}, '%')
+            </if>
+            <if test="className != null and className != ''">
+                and concat('%', c.name, '%') = #{className}
+            </if>
+        </where>
+        order by c.code ASC
     </select>
 </mapper>
