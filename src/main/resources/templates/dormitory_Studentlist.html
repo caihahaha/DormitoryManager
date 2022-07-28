@@ -92,9 +92,6 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-            <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>宿舍编号</th>
             <th>宿舍楼</th>
             <th>已用床位</th>
@@ -105,9 +102,6 @@
         <tbody th:each="do_stu_vo:${do_stu}">
             <th:block th:with="stus=${do_stu_vo.studentsList}">
                 <tr th:each="stu:${stus}">
-                    <th>
-                        <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-                    </th>
                     <td th:text="${do_stu_vo.code}"></td>
                     <td th:text="${do_stu_vo.dormitoryLocation}"></td>
                     <td th:text="${do_stu_vo.bedTotal}"></td>

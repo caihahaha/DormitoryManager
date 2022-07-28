@@ -31,7 +31,7 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="/findDormitory">宿舍信息</a>
+        <a href="/DormitorySystem/findDormitory">宿舍信息</a>
 
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/DormitorySystem/findDormitory" title="刷新">
@@ -44,8 +44,8 @@
             <input class="layui-input" placeholder="请输入宿舍楼" name="dormitoryLocation" id="dormitoryLocation">
             <input class="layui-input" placeholder="请输入管理员姓名" name="adminName" id="adminName">
 
-            <input class="layui-input" type="hidden" name="pageNum" th:value="${page.current}">
-            <input class="layui-input" type="hidden" name="pageSize" th:value="${page.size}">
+            <input class="layui-input" type="hidden" name="pageNum" value="1">
+            <input class="layui-input" type="hidden" name="pageSize" value="10">
             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
@@ -130,7 +130,7 @@
             <td th:text="${di.bedUsed}"> </td>
             <td th:text="${di.adminName}"> </td>
             <td>
-                <a title="编辑"    id= "updateEdit"    th:href="@{/findDormitoryById(id=${di.id})}">
+                <a title="编辑"    id= "updateEdit"    th:href="@{/findDormRepairById(id=${di.id})}">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
                 <a title="删除" th:onclick="'javascript:member_del(this,\''+${di.id}+'\')'" >

@@ -15,35 +15,26 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form"  id="f_auto" action="/updateDormRepair" method="post" >
-        <input type="hidden" value="${sessionScope.d.r_id}" name="r_id" id="r_id"/>
+    <form class="layui-form"  id="f_auto" action="/DormitorySystem/updateDormRepair" method="post" >
+        <input type="hidden" th:value="${dr.id}" name="id" id="id"/>
         <div class="layui-form-item">
-            <label for="d_id" class="layui-form-label">
+            <label for="dormitoryId" class="layui-form-label">
                 <span class="">宿舍编号</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="d_id" name="d_id"
-                       autocomplete="off" value="${sessionScope.d.d_id}" class="layui-input">
+                <input type="text" id="dormitoryId" name="dormitoryId"
+                       autocomplete="off" th:value="${dr.dormitoryId}" class="layui-input">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label for="d_dormbuilding" class="layui-form-label">
-                <span class="">宿舍楼</span>
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="d_dormbuilding" name="d_dormbuilding"
-                       autocomplete="off" value="${sessionScope.d.d_dormbuilding}" class="layui-input">
-            </div>
-        </div>
 
         <div class="layui-form-item">
-            <label for="r_name" class="layui-form-label">
-                <span class="">维修人员</span>
+            <label for="studentId" class="layui-form-label">
+                <span class="">学生编号</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="r_name" name="r_name"
-                       autocomplete="off" value="${sessionScope.d.r_name}" class="layui-input">
+                <input type="text" id="studentId" name="studentId"
+                       autocomplete="off" th:value="${dr.studentId}" class="layui-input">
             </div>
         </div>
 
@@ -53,11 +44,11 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="reason" name="reason"
-                       autocomplete="off" value="${sessionScope.d.reason}" class="layui-input">
+                       autocomplete="off" th:value="${dr.reason}" class="layui-input">
             </div>
         </div>
 
-        <input type="hidden" value="${sessionScope.d.update_time}" name="update_time" id="update_time"/>
+        <input type="hidden" th:value="${dr.updatedTime}" name="update_time" id="update_time"/>
 
         <div class="layui-form-item" id="btn_xg">
             <button  class="layui-btn" id="btn_on"  lay-submit="" lay-filter="updateClass">
