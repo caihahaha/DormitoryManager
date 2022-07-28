@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.dao.DormitoryDao;
 import com.gdut.dormitory_system.entity.DormitoryInfo;
+import com.gdut.dormitory_system.entity.PageInfo;
 import com.gdut.dormitory_system.service.DormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,23 +33,19 @@ public class DormitoryServiceImpl implements DormitoryService {
             分页查询
          */
     @Override
-    public IPage<DormitoryInfo> findDormitory(String adminName, Integer id, String dormitoryLocation,
-                                             Integer pageIndex, Integer pageSize) {
+    public PageInfo<DormitoryInfo> findDormitory(String adminName, String code, String dormitoryLocation,
+                                                 Integer pageNum, Integer pageSize) {
         QueryWrapper<DormitoryInfo> wrapper = new QueryWrapper<>();
-        IPage<DormitoryInfo> page;
-        if(pageIndex!=null && pageSize!=null){
-             page = new Page<>(pageIndex,pageSize);
-        }else{
-             page = new Page<>();
-        }
-        if (adminName!=null){
+        PageInfo<DormitoryInfo> page;
+        page = new PageInfo<>(pageNum,pageSize);
+        if (adminName!=""&&adminName!=null){
             wrapper.eq("admin_name",adminName);
         }
-        if(id!=null){
-            wrapper.eq("id",id);
+        if(code!=""&&code!=null){
+            wrapper.eq("code",code);
         }
-        if(dormitoryLocation!=null){
-            wrapper.eq("dormitoryLocation",dormitoryLocation);
+        if(dormitoryLocation!=""&&dormitoryLocation!=null){
+            wrapper.eq("dormitory_location",dormitoryLocation);
         }
         dormitoryDao.selectPage(page,wrapper);
 
@@ -65,6 +62,12 @@ public class DormitoryServiceImpl implements DormitoryService {
         return list;
     }
 
+    @Override
+    public DormitoryInfo findOneByCode(String code) {
+        QueryWrapper<DormitoryInfo> wrapper =new QueryWrapper<>();
+        wrapper.eq("code", code);
+        return dormitoryDao.selectOne(wrapper);
+    }
 
     /*
         删除某一个宿舍
@@ -74,6 +77,9 @@ public class DormitoryServiceImpl implements DormitoryService {
         return dormitoryDao.deleteById(dormitoryId);
     }
 
+    /*
+        根据code查找宿舍
+     */
     @Override
     public List<DormitoryInfo> findByCode(Integer code) {
         Map<String,Object> cmap = new HashMap<>();
@@ -81,5 +87,26 @@ public class DormitoryServiceImpl implements DormitoryService {
         return dormitoryDao.selectByMap(cmap);
     }
 
+    /*
+    根据id查询宿舍
+     */
+    @Override
+    public DormitoryInfo findDormitoryById(Integer id) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("id",id);
+        DormitoryInfo dormitoryInfo = dormitoryDao.selectOne(wrapper);
+        return dormitoryInfo;
+    }
 
+    @Override
+    public int updateDormitory(DormitoryInfo dormitoryInfo) {
+        int res = dormitoryDao.updateById(dormitoryInfo);
+        return  res;
+    }
+
+
+    @Override
+    public DormitoryInfo findDormitoryById(Integer dormitoryId) {
+        return dormitoryDao.selectById(dormitoryId);
+    }
 }

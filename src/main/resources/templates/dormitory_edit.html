@@ -14,55 +14,55 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form"  id="f_auto" action="/updateDormitory" method="post" >
-        <input type="hidden" value="${sessionScope.d.d_id}" name="d_id" id="d_id"/>
+    <form class="layui-form"  id="f_auto" th:action="@{/updateDormitory}" th:method="post" >
+        <input type="hidden" th:value="${d.id}" name="id" id="id"/>
         <div class="layui-form-item">
-            <label for="s_dormitoryid" class="layui-form-label">
+            <label for="code" class="layui-form-label">
                 <span class="">宿舍编号</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="s_dormitoryid" name="s_dormitoryid"
-                       autocomplete="off" value="${sessionScope.d.s_dormitoryid}" class="layui-input">
+                <input type="text" id="code" name="code"
+                       autocomplete="off" th:value="${d.code}" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label for="d_dormbuilding" class="layui-form-label">
+            <label for="dormitoryLocation" class="layui-form-label">
                 <span class="">宿舍楼</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="d_dormbuilding" name="d_dormbuilding"
-                       autocomplete="off" value="${sessionScope.d.d_dormbuilding}" class="layui-input">
+                <input type="text" id="dormitoryLocation" name="dormitoryLocation"
+                       autocomplete="off" th:value="${d.dormitoryLocation}" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label for="d_bedtotal" class="layui-form-label">
+            <label for="bedTotal" class="layui-form-label">
                 <span class="">床位总数</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="d_bedtotal" name="d_bedtotal"
-                       autocomplete="off" value="${sessionScope.d.d_bedtotal}" class="layui-input">
+                <input type="text" id="bedTotal" name="bedTotal"
+                       autocomplete="off" th:value="${d.bedTotal}" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label for="d_bed" class="layui-form-label">
+            <label for="bedUsed" class="layui-form-label">
                 <span class="">已用床位</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="d_bed" name="d_bed"
-                       autocomplete="off" value="${sessionScope.d.d_bed}" class="layui-input">
+                <input type="text" id="bedUsed" name="bedUsed"
+                       autocomplete="off" th:value="${d.bedUsed}" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label for="a_name" class="layui-form-label">
+            <label for="adminName" class="layui-form-label">
                 <span class="">管理员姓名</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_name" name="a_name"
-                       autocomplete="off" value="${sessionScope.d.a_name}" class="layui-input">
+                <input type="text" id="adminName" name="adminName"
+                       autocomplete="off" th:value="${d.adminName}" class="layui-input">
             </div>
         </div>
 

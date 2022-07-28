@@ -34,25 +34,25 @@
         <a href="/findDormitory">宿舍信息</a>
 
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/findDormitory" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/DormitorySystem/findDormitory" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="/findDormitory" >
-            <input class="layui-input" placeholder="请输入宿舍编号" name="s_dormitoryid" id="s_dormitoryid">
-            <input class="layui-input" placeholder="请输入宿舍楼" name="d_dormbuilding" id="d_dormbuilding">
-            <input class="layui-input" placeholder="请输入管理员姓名" name="a_name" id="a_name">
+        <form class="layui-form layui-col-md12 x-so" action="/DormitorySystem/findDormitory" >
+            <input class="layui-input" placeholder="请输入宿舍编号" name="code" id="code" >
+            <input class="layui-input" placeholder="请输入宿舍楼" name="dormitoryLocation" id="dormitoryLocation">
+            <input class="layui-input" placeholder="请输入管理员姓名" name="adminName" id="adminName">
 
-            <input class="layui-input" type="hidden" name="pageIndex" value="1">
-            <input class="layui-input" type="hidden" name="pageSize" value="3">
+            <input class="layui-input" type="hidden" name="pageNum" th:value="${page.current}">
+            <input class="layui-input" type="hidden" name="pageSize" th:value="${page.size}">
             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
     <xblock>
         <button id="addStudnetBtn" class="layui-btn layui-btn-normal"> <i class="layui-icon">&#xe654;</i>添加 </button>
         <button class="layui-btn layui-btn-warm" lay-filter="toolbarDemo" lay-submit=""><i class="layui-icon">&#xe67c;</i>导出</button>
-        <span class="x-right" style="line-height:40px" th:text="${di.total}+'条'"></span>
+        <span class="x-right" style="line-height:40px" th:text="${page.total}+'条'"></span>
     </xblock>
 
 
@@ -119,7 +119,7 @@
             <th>操作</th>
         </thead>
         <tbody>
-        <tr th:each="di:${di.records}">
+        <tr th:each="di:${page.records}">
             <td>
                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
@@ -130,7 +130,7 @@
             <td th:text="${di.bedUsed}"> </td>
             <td th:text="${di.adminName}"> </td>
             <td>
-                <a title="编辑"    id= "updateEdit"    href="/findDormitoryById?d_id=${di.d_id}">
+                <a title="编辑"    id= "updateEdit"    th:href="@{/findDormitoryById(id=${di.id})}">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
                 <a title="删除" th:onclick="'javascript:member_del(this,\''+${di.id}+'\')'" >
@@ -165,20 +165,25 @@
         </tbody>
     </table>
 
-<div class="" >
-    <input type="hidden" id="totalPageCount" th:value="${di.total}-${di.size}+1"/>
-        <import url="pageBtn.html">
-            <param name="totalCount" th:value="${di.total}"/>
-            <param name="currentPageNo" th:value="${di.current}"/>
-            <param name="totalPageCount" th:value="${di.total}-${di.size}+1"/>
-        </import>
+    <div class="" >
+        <input type="hidden" id="totalPageCount" th:value="${page.pages}"/>
+        <div class="page-bar" id="pg_div" th:replace="pageBtn::page_btn"></div>
+    </div>
+<!--<div class="" >-->
+<!--    <input type="hidden" id="totalPageCount" th:value="${di.total}-${di.size}+1"/>-->
+<!--        <import url="pageBtn.html">-->
+<!--            <param name="totalCount" th:value="${di.total}"/>-->
+<!--            <param name="currentPageNo" th:value="${di.current}"/>-->
+<!--            <param name="totalPageCount" th:value="${di.total}-${di.size}+1"/>-->
+<!--        </import>-->
+<!--    -->
 
 <!--<%&#45;&#45;    <c:import url="pageBtn.jsp">&#45;&#45;%>-->
 <!--<%&#45;&#45;        <c:param name="totalCount" value="${di.totalCount}"/>&#45;&#45;%>-->
 <!--<%&#45;&#45;        <c:param name="currentPageNo" value="${di.pageIndex}"/>&#45;&#45;%>-->
 <!--<%&#45;&#45;        <c:param name="totalPageCount" value="${di.pageTotalCount}"/>&#45;&#45;%>-->
 <!--<%&#45;&#45;    </c:import>&#45;&#45;%>-->
-</div>
+<!--</div>-->
 <script>
 
     layui.config({
@@ -201,7 +206,7 @@
         form.on('submit(toolbarDemo)', function(){
 
             $.ajax({
-                url: '/exportdormitorylist',
+                url: '/DormitorySystem/exportdormitorylist',
                 type: 'post',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
@@ -210,16 +215,16 @@
 
                     // 1. 如果需要调整顺序，请执行梳理函数
                     var dt = excel.filterExportData(data, [
-                        'd_id'
-                        ,'s_dormitoryid'
-                        ,'d_dormbuilding'
-                        ,'d_bedtotal'
-                        ,'d_bed'
-                        ,'a_name'
+                        'id'
+                        ,'code'
+                        ,'dormitoryLocation'
+                        ,'bedTotal'
+                        ,'bedUsed'
+                        ,'adminName'
                     ]);
 
                     // 2. 数组头部新增表头
-                    dt.unshift({d_id: 'ID', s_dormitoryid: '宿舍编号', d_dormbuilding: '宿舍楼', d_bedtotal: '床位总数', d_bed: '医用床位', a_name: '管理员'});
+                    dt.unshift({id: 'ID', code: '宿舍编号', dormitoryLocation: '宿舍楼', bedTotal: '床位总数', bedUsed: '已用床位', adminName: '管理员'});
 
                     // 意思是：A列40px，B列60px(默认)，C列120px，D、E、F等均未定义
                     var colConf = excel.makeColConfig({
@@ -245,12 +250,12 @@
 
                 error: function () {
                     //console.log(data);
-                    setTimeout(function () {window.location.href='/findDormitory';},2000);
+                    setTimeout(function () {window.location.href='/DormitorySystem/findDormitory';},2000);
                 }
             });
         });
 
-        /*添加弹出框*/
+          /*添加弹出框*/
         $("#addStudnetBtn").click(function () {
             layer.open({
                 type:1,

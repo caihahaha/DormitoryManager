@@ -3,6 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gdut.dormitory_system.dao.StudentDao">
 
+    <sql id="student">
+        SELECT
+            s.id AS id,
+            s.`code` AS student_code,
+            s.`name` AS student_name,
+            s.sex AS student_sex,
+            s.age AS student_age,
+            s.phone AS student_phone,
+            s.dormitory_id,
+            s.class_id,
+            c.`code` AS class_code,
+            c.`name` AS class_name,
+            d.`code` AS dormitory_code
+        FROM
+            student s
+                LEFT JOIN class_info c ON s.class_id = c.id
+                LEFT JOIN dormitory_info d ON s.dormitory_id = d.id
+    </sql>
+
     <resultMap id="studentMap" type="com.gdut.dormitory_system.entity.Student">
         <id column="id" property="id"/>
         <result column="student_code" property="code"/>
@@ -10,6 +29,8 @@
         <result column="student_sex" property="sex"/>
         <result column="student_age" property="age"/>
         <result column="student_phone" property="phone"/>
+        <result column="dormitory_id" property="dormitoryId"/>
+        <result column="class_id" property="classId"/>
         <collection property="classInfo" ofType="com.gdut.dormitory_system.entity.ClassInfo">
             <result column="class_code" property="code"/>
             <result column="class_name" property="name"/>
@@ -19,22 +40,9 @@
         </collection>
     </resultMap>
 
-    <select id="selectAllStudent" resultMap="studentMap">
-        SELECT
-            s.id AS id,
-            s.`code` AS student_code,
-            s.`name` AS student_name,
-            s.sex AS student_sex,
-            s.age AS student_age,
-            s.phone AS student_phone,
-            c.`code` AS class_code,
-            c.`name` AS class_name,
-            d.`code` AS dormitory_code
-        FROM
-            student s
-                LEFT JOIN class_info c ON s.class_id = c.id
-                LEFT JOIN dormitory_info d ON s.dormitory_id = d.id
 
+    <select id="selectAllStudent" resultMap="studentMap">
+        <include refid="student"></include>
         <where>
             <if test="queryStudentVO.name != null and queryStudentVO.name != ''">
                 and concat('%', s.name, '%') like  concat('%', #{queryStudentVO.name}, '%')
@@ -49,5 +57,9 @@
                 and concat('%', c.name, '%') = #{queryStudentVO.className}
             </if>
         </where>
+    </select>
+    <select id="selectStudentById" resultMap="studentMap">
+        <include refid="student"></include>
+        where s.id = #{id}
     </select>
 </mapper>
