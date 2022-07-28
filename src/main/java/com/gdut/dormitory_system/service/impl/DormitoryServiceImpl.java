@@ -62,6 +62,12 @@ public class DormitoryServiceImpl implements DormitoryService {
         return list;
     }
 
+    @Override
+    public DormitoryInfo findOneByCode(String code) {
+        QueryWrapper<DormitoryInfo> wrapper =new QueryWrapper<>();
+        wrapper.eq("code", code);
+        return dormitoryDao.selectOne(wrapper);
+    }
 
     /*
         删除某一个宿舍
@@ -99,4 +105,8 @@ public class DormitoryServiceImpl implements DormitoryService {
     }
 
 
+    @Override
+    public DormitoryInfo findDormitoryById(Integer dormitoryId) {
+        return dormitoryDao.selectById(dormitoryId);
+    }
 }

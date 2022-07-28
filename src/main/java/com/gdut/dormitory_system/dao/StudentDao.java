@@ -22,4 +22,6 @@ import java.util.List;
 public interface StudentDao extends BaseMapper<Student> {
 
     PageInfo<Student> selectAllStudent(PageInfo<Student> page, @Param("queryStudentVO") QueryStudentVO queryStudentVO);
+
+    Student selectStudentById(Integer id);
 }

@@ -48,5 +48,8 @@ public class Student {
     private ClassInfo classInfo;
 
     @TableField(exist = false)
+    private String dormitoryCode;
+
+    @TableField(exist = false)
     private DormitoryInfo dormitoryInfo;
 }
