@@ -7,7 +7,8 @@ spring:
     url: jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
 #    password: password
-    password: 963852741..
+#    password: 963852741..
+    password: 123456
   redis:
     host: localhost
     port: 6379
