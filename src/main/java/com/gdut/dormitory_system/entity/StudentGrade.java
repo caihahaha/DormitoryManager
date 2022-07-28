@@ -35,6 +35,9 @@ public class StudentGrade {
 
     private Integer grade;
 
+    @TableField(exist = false)
+    private String name;
+
     /** 创建时间 */
     @TableField(value = "created_time", fill = FieldFill.INSERT)
     private Date createdTime ;

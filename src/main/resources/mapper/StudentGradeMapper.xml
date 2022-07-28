@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdut.dormitory_system.dao.StudentGradeDao">
+
+    <sql id="student_grade">
+        SELECT
+            g.id AS id,
+            g.student_id AS student_id,
+            s.`name` AS name,
+            g.grade AS grade,
+            g.class_id AS class_id,
+            g.dormitory_id AS dormitory_id,
+            g.created_time,
+            g.updated_time
+        FROM
+            student_grade g
+                LEFT JOIN student s ON g.student_id = s.code
+    </sql>
+
+    <resultMap id="studentGradeMap" type="com.gdut.dormitory_system.entity.StudentGrade">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="class_id" property="classId"/>
+        <result column="dormitory_id" property="dormitoryId"/>
+        <result column="grade" property="grade"/>
+        <result column="name" property="name"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+
+    <select id="selectAllStudentGrade" resultMap="studentGradeMap">
+        <include refid="student_grade"></include>
+        <where>
+            <if test="queryStudentGradeVO.name != null and queryStudentGradeVO.name != ''">
+                and concat('%', s.name, '%') like  concat('%', #{queryStudentGradeVO.name}, '%')
+            </if>
+            <if test="queryStudentGradeVO.studentId != null and queryStudentGradeVO.studentId != ''">
+                and  g.student_id = #{queryStudentGradeVO.studentId}
+            </if>
+<!--            <if test="queryStudentGradeVO.dormitoryId != null and queryStudentGradeVO.dormitoryId != ''">-->
+<!--&#45;&#45;                 and concat('%', g.dormitory_id, '%') like concat('%', #{queryStudentGradeVO.dormitoryId}, '%')-->
+<!--                and  g.dormitory_id = #{queryStudentGradeVO.dormitoryId}-->
+<!--            </if>-->
+        </where>
+    </select>
+    <!--<select id="selectStudentById" resultMap="studentMap">-->
+    <!--    <include refid="student"></include>-->
+    <!--    where s.id = #{id}-->
+    <!--</select>-->
+</mapper>

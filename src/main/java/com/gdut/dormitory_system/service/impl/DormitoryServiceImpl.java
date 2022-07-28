@@ -105,8 +105,8 @@ public class DormitoryServiceImpl implements DormitoryService {
     }
 
 
-    @Override
-    public DormitoryInfo findDormitoryById(Integer dormitoryId) {
-        return dormitoryDao.selectById(dormitoryId);
-    }
+    // @Override
+    // public DormitoryInfo findDormitoryById(Integer dormitoryId) {
+    //     return dormitoryDao.selectById(dormitoryId);
+    // }
 }
