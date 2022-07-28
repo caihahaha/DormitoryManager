@@ -13,7 +13,7 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form" method="post"  id="f_auto" accept-charset="UTF-8">
+    <form class="layui-form"  id="f_auto" >
         <input type="hidden" th:value="${student.id}" name="id" id="id"/>
         <div class="layui-form-item">
             <label for="s_studentid" class="layui-form-label">
@@ -110,13 +110,11 @@
                 success:function(data){
                     data = JSON.parse(data)
                     if (data.code == 1) {
-                        console.log(data.code)
-                        // layer.msg(data.msg, {icon: 1, time: 3000, area:['200px', '100px']});
+                        layer.msg(data.msg, {icon: 1, time: 2000});
                         setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                     }else {
                         layer.msg(data.msg, {icon: 0, time: 3000, area:['200px', '100px']});
                     }
-
 
                 },
                 error:function(data){
@@ -124,6 +122,7 @@
                     setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                 }
             });
+            return false;
         })
 
     });

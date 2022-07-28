@@ -9,21 +9,20 @@
     <link rel="stylesheet" th:href="@{/css/pg_btn.css}">
     <script type="text/javascript" th:src="@{/js/jquery-1.3.2.min.js}"></script>
     <script th:src="@{/lib/layui/layui.js}"></script>
-    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 
 <body>
 
 <div class="x-body">
-    <form class="layui-form"  id="f_auto" action="/updateClass" method="post" >
-        <input type="hidden" value="${sessionScope.c.c_id}" name="c_id" id="c_id"/>
+    <form class="layui-form"  id="f_auto" method="post" >
+        <input type="hidden" th:value="${classInfo.id}" name="id" id="id"/>
         <div class="layui-form-item">
-            <label for="c_classid" class="layui-form-label">
+            <label for="code" class="layui-form-label">
                 <span class="">班级编号</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_classid" name="c_classid"
-                       autocomplete="off" value="${sessionScope.c.c_classid}" class="layui-input">
+                <input type="text" id="code" name="code"
+                       autocomplete="off" th:value="${classInfo.code}" class="layui-input">
             </div>
         </div>
 
@@ -32,8 +31,8 @@
                 <span class="">班级名</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_classname" name="c_classname"
-                       autocomplete="off" value="${sessionScope.c.c_classname}" class="layui-input">
+                <input type="text" id="c_classname" name="name"
+                       autocomplete="off" th:value="${classInfo.name}" class="layui-input">
             </div>
         </div>
 
@@ -42,8 +41,8 @@
                 <span class="">辅导员姓名</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="c_counsellor" name="c_counsellor"
-                       autocomplete="off" value="${sessionScope.c.c_counsellor}" class="layui-input">
+                <input type="text" id="c_counsellor" name="counsellor"
+                       autocomplete="off" th:value="${classInfo.counsellor}" class="layui-input">
             </div>
         </div>
 
@@ -57,7 +56,40 @@
 </div>
 
 <script>
+    var baseUrl = '/DormitorySystem'
+    layui.use(['form','layer','laydate'], function(){
+        var form = layui.form,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+        form.on('submit(updateClass)', function(data) {
+            var param = data.field;
+            console.log(JSON.stringify(param))
+            $.ajax({
+                url: baseUrl + '/updateClassInfo',
+                type: "post",
+                data: JSON.stringify(param),
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    data = JSON.parse(data)
+                    if (data.code == 1) {
+                        console.log(data.code)
+                        layer.msg(data.msg, {icon: 1, time: 3000});
+                        setTimeout(function () {window.location.href= baseUrl + '/findClassInfo';},2000);
+                    }else {
+                        layer.msg(data.msg, {icon: 0, time: 3000});
+                    }
 
+
+                },
+                error:function(data){
+                    layer.msg(data.msg, {icon: 0, time: 3000});
+                    setTimeout(function () {window.location.href= baseUrl + '/findClassInfo';},2000);
+                }
+            });
+            return false;
+        })
+
+    });
 </script>
 </body>
 </html>

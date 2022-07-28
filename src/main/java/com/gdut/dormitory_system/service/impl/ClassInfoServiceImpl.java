@@ -62,4 +62,9 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     public List<ClassInfo> findAllClassInfo() {
         return classInfoDao.selectList(null);
     }
+
+    @Override
+    public ClassInfo findClassInfoById(int id) {
+        return classInfoDao.selectById(id);
+    }
 }

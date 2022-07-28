@@ -40,6 +40,7 @@ public class ClassInfoController {
                                  @RequestParam(value = "counsellor", required = false) String counsellor) {
         PageInfo<ClassInfo> page = new PageInfo<>(pageNum, pageSize);
         page.setPath("/findClassInfo");
+        System.out.println("********************************"+page.getTotal());
         model.addAttribute("page", classInfoService.findClassInfoPage(page, code, className, counsellor));
         model.addAttribute("code", code);
         model.addAttribute("className", className);
@@ -87,5 +88,12 @@ public class ClassInfoController {
             return JSONUtils.getJSONString(1, "删除成功");
         }
         return JSONUtils.getJSONString(0, "删除失败");
+    }
+
+    @GetMapping("/findClassInfoById/{id}")
+    public String findClassInfoById(@PathVariable Integer id, Model model) {
+        ClassInfo classInfo = classInfoService.findClassInfoById(id);
+        model.addAttribute("classInfo", classInfo);
+        return "class_edit";
     }
 }

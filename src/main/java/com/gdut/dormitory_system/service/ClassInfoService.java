@@ -25,4 +25,6 @@ public interface ClassInfoService {
     int deleteClassInfoById(Integer id);
 
     List<ClassInfo> findAllClassInfo();
+
+    ClassInfo findClassInfoById(int id);
 }

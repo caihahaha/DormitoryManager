@@ -104,9 +104,4 @@ public class DormitoryServiceImpl implements DormitoryService {
         return  res;
     }
 
-
-    @Override
-    public DormitoryInfo findDormitoryById(Integer dormitoryId) {
-        return dormitoryDao.selectById(dormitoryId);
-    }
 }
