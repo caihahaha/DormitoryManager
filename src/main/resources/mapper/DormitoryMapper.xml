@@ -4,4 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdut.dormitory_system.dao.DormitoryDao">
 
+    <resultMap id="queryDormitoryStudent" type="com.gdut.dormitory_system.entity.vo.QueryDormitoryStudentVo">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="dormitoryLocation" column="dormitory_location"/>
+        <result property="bedTotal" column="bed_total"/>
+        <result property="bedUsed" column="bed_used"/>
+        <result property="adminName" column="admin_name"/>
+        <collection property="studentsList" ofType="com.gdut.dormitory_system.entity.Student" javaType="ArrayList">
+            <result property="id" column="id"/>
+            <result property="code" column="code"/>
+            <result property="name" column="name"/>
+            <result property="sex" column="sex"/>
+            <result property="age" column="age"/>
+            <result property="phone" column="phone"/>
+            <result property="classId" column="class_id"/>
+            <result property="dormitoryId" column="dormitory_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="findDormitoryStudent" parameterType="com.gdut.dormitory_system.entity.vo.QueryDormitoryStudentVo" resultMap="queryDormitoryStudent">
+        select dormitory_info.id,dormitory_info.code,dormitory_info.dormitory_location,dormitory_info.bed_total,
+        dormitory_info.bed_used,dormitory_info.admin_name,
+        student.id sid,student.code scode,student.name,student.sex,student.age,student.phone,student.class_id,student.dormitory_id
+        from dormitory_info join student
+        on dormitory_info.code = student.dormitory_id
+        <if test="code!=null">
+            where dormitory_info.code = #{code}
+        </if>
+    </select>
 </mapper>

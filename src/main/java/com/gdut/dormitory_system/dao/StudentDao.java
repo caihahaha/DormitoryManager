@@ -24,4 +24,6 @@ public interface StudentDao extends BaseMapper<Student> {
     PageInfo<Student> selectAllStudent(PageInfo<Student> page, @Param("queryStudentVO") QueryStudentVO queryStudentVO);
 
     Student selectStudentById(Integer id);
+
+    PageInfo<Student> selectAllStudentForClass(PageInfo<Student> page, @Param("classCode") String classCode, @Param("className") String className);
 }

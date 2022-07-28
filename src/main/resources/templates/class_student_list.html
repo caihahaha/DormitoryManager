@@ -5,11 +5,11 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <%--<meta http-equiv="Cache-Control" content="no-siteapp" />--%>
 
     <link rel="icon" th:href="@{/images/favicon.ico}" sizes="32x32" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
     <link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <link rel="stylesheet" th:href="@{/css/pg_btn.css}">
     <script type="text/javascript" th:src="@{/js/jquery-1.3.2.min.js}"></script>
     <script th:src="@{/lib/layui/layui.js}"></script>
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
@@ -32,20 +32,22 @@
         <a href="/findClassStudent">班级学生</a>
 
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/findClassStudent" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:href="@{/findClassStudent}" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="/findClassStudent" >
-            <input class="layui-input" placeholder="请输入班级编号" name="c_classid" id="c_classid">
-            <input class="layui-input" placeholder="请输入班级名" name="c_classname" id="c_classname">
+        <form class="layui-form layui-col-md12 x-so" th:action="@{/findClassStudent}" >
+            <input class="layui-input" placeholder="请输入班级编号" name="classCode" id="c_classid" th:value="${classCode}">
+            <input class="layui-input" placeholder="请输入班级名" name="className" id="c_classname" th:value="${className}">
 
             <button class="layui-btn" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i></button>
+            <a class="layui-btn" th:href="@{/findClassStudent}">
+                <i class="layui-icon" style="font-size: 14px" title="重置">重置 &#xe669;</i>
+            </a>
         </form>
     </div>
 
-    <%--表格数据--%>
     <table class="layui-table" id="tb">
         <thead>
         <tr>
@@ -58,30 +60,23 @@
             <th>宿舍编号</th>
         </thead>
         <tbody>
-
-        <!--将返回的Model数据的students集合分步提取出来，循环遍历-->
-        <!--前一段为Class数据，后面多段为Student数据-->
-        <!--返回数据不受刷新影响，原本就包含在页面中-->
-<%--        <c:forEach items="${cs}" var="c">--%>
-
-<%--                <c:set value="${c.students}" var="cc" />--%>
-
-<%--                <c:forEach items="${cc}" var="sc">--%>
-<%--                    <tr>--%>
-<%--                    <td>${c.c_classid}</td>--%>
-<%--                    <td>${c.c_classname}</td>--%>
-<%--                    <td>${c.c_counsellor}</td>--%>
-<%--                    <td>${sc.s_studentid}</td>--%>
-<%--                    <td>${sc.s_name}</td>--%>
-<%--                    <td>${sc.s_phone}</td>--%>
-<%--                    <td>${sc.s_dormitoryid}</td>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
-
-<%--        </c:forEach>--%>
+            <tr th:each="classStudent:${page.records}">
+                <td th:text="${classStudent.classInfo.code}"></td>
+                <td th:text="${classStudent.classInfo.name}"></td>
+                <td th:text="${classStudent.classInfo.counsellor}"></td>
+                <td th:text="${classStudent.code}"></td>
+                <td th:text="${classStudent.name}"></td>
+                <td th:text="${classStudent.phone}"></td>
+                <td th:text="${classStudent.dormitoryInfo.code}"></td>
+            </tr>
         </tbody>
     </table>
 
+</div>
+
+<div class="" >
+    <input type="hidden" id="totalPageCount" th:value="${page.pages}"/>
+    <div class="page-bar" id="pg_div" th:replace="pageBtn::page_btn"></div>
 </div>
 
 <script>

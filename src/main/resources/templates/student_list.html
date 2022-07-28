@@ -256,9 +256,9 @@
             });
             $("#addEmployeeForm")[0].reset();
             form.on('submit(formDemo)', function(data) {
-                // layer.msg('aaa',{icon:1,time:3000});
+
                 var param = data.field;
-                // console.log(JSON.stringify(param));
+
                 $.ajax({
                     url: baseUrl + '/addStudent',
                     type: "post",
@@ -267,7 +267,7 @@
                     success:function(data){
                         data = JSON.parse(data)
                         if (data.code == 1) {
-                            layer.msg(data.msg, {icon: 1, time: 3000, area:['200px', '100px']});
+                            layer.msg(data.msg, {icon: 1, time: 3000});
                             setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                         }else {
                             layer.msg(data.msg, {icon: 0, time: 3000, area:['200px', '100px']});
@@ -276,8 +276,8 @@
 
                     },
                     error:function(){
-                        layer.msg('添加失败',{icon:0,time:3000, area:['200px', '100px']});
-                        setTimeout(function () {window.location.href=baseUrl + '/findStudent';},2000);
+                        layer.msg('添加失败',{icon:0,time:3000});
+                        setTimeout(function () {window.location.href= baseUrl + '/findStudent';},2000);
                     }
                 });
                 // return false;

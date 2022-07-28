@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gdut.dormitory_system.dao.ClassInfoDao;
 import com.gdut.dormitory_system.entity.ClassInfo;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.Student;
+import com.gdut.dormitory_system.entity.vo.QueryStudentVO;
 import com.gdut.dormitory_system.service.ClassInfoService;
+import com.gdut.dormitory_system.service.StudentService;
 import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
@@ -27,6 +30,9 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 
     @Autowired
     private ClassInfoDao classInfoDao;
+
+    @Autowired
+    private StudentService studentService;
 
     @Override
     public PageInfo<ClassInfo> findClassInfoPage(PageInfo<ClassInfo> page, String code, String className, String counsellor) {
@@ -61,5 +67,15 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     @Override
     public List<ClassInfo> findAllClassInfo() {
         return classInfoDao.selectList(null);
+    }
+
+    @Override
+    public ClassInfo findClassInfoById(int id) {
+        return classInfoDao.selectById(id);
+    }
+
+    @Override
+    public PageInfo<Student> findClassStudent(PageInfo<Student> page, String classCode, String className) {
+        return studentService.findAllStudentForClass(page, classCode, className);
     }
 }

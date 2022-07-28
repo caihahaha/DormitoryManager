@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdut.dormitory_system.entity.DormitoryInfo;
 import com.gdut.dormitory_system.entity.PageInfo;
+import com.gdut.dormitory_system.entity.vo.QueryDormitoryStudentVo;
 import com.gdut.dormitory_system.service.DormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,9 +45,6 @@ public class DormitoryController {
         return "dormitory_edit";
 
     }
-
-
-
 
 
     /*
@@ -93,6 +91,16 @@ public class DormitoryController {
     public List<DormitoryInfo> exportDormitory(){
         List<DormitoryInfo> dormitoryList = dormitoryService.findAll();
         return dormitoryList;
+    }
+
+    /**
+     * 宿舍人员信息查询
+     */
+    @RequestMapping(value = "/findDormitoryStudent")
+    public String findDormitoryStudent(QueryDormitoryStudentVo queryDormitoryStudentVo, Model model) {
+        List<QueryDormitoryStudentVo> do_stu = dormitoryService.findDormitoryStudent(queryDormitoryStudentVo);
+        model.addAttribute("do_stu",do_stu);
+        return "dormitory_Studentlist";
     }
 
 }
