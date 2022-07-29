@@ -83,10 +83,10 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     //根据code查询
     @Override
-    public DormitoryInfo findOneByCode(String code) {
+    public List<DormitoryInfo> findOneByCode(String code) {
         QueryWrapper<DormitoryInfo> wrapper =new QueryWrapper<>();
         wrapper.eq("code", code);
-        return dormitoryDao.selectOne(wrapper);
+        return dormitoryDao.selectList(wrapper);
     }
 
     /*

@@ -149,7 +149,7 @@
                 <td th:text="${student.phone}"></td>
                 <td th:text="${student.classInfo.code}"></td>
                 <td th:text="${student.classInfo.name}"></td>
-                <td th:text="${student.dormitoryInfo.code}"></td>
+                <td th:text="${student.dormitoryCode}"></td>
                 <td>
                     <a title="编辑"    id= "updateStudentBtn"  th:href="@{'/findStudentById/' + ${student.id}}" >
                         <i class="layui-icon">&#xe642;</i>

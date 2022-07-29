@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 
 /**
  * @PackgeName: com.gdut.dormitory_system.service.impl
@@ -38,21 +39,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addStudent(Student student) {
-        DormitoryInfo dormitoryInfo = dormitoryService.findOneByCode(student.getDormitoryCode());
-        if (dormitoryInfo == null) {
+        List<DormitoryInfo> dormitoryInfo = dormitoryService.findOneByCode(student.getDormitoryCode());
+        if (dormitoryInfo.size() == 0) {
             return -2;
         }
-        student.setDormitoryId(dormitoryInfo.getId());
+        student.setDormitoryId(dormitoryInfo.get(0).getId());
         return studentDao.insert(student);
     }
 
     @Override
     public int updateStudentById(Student student) {
-        DormitoryInfo dormitoryInfo = dormitoryService.findOneByCode(student.getDormitoryCode());
-        if (dormitoryInfo == null) {
+        List<DormitoryInfo> dormitoryInfo = dormitoryService.findOneByCode(student.getDormitoryCode());
+        if (dormitoryInfo.size() == 0) {
             return -2;
         }
-        student.setDormitoryId(dormitoryInfo.getId());
+        student.setDormitoryId(dormitoryInfo.get(0).getId());
         return studentDao.updateById(student);
     }
 
